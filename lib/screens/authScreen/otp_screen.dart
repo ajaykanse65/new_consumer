@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_consumer/providers/auth_provider.dart';
-import 'package:new_consumer/screens/screen_content/authScreenContent/otp_screen_content.dart';
+import 'package:new_consumer/screen_content/authScreenContent/otp_screen_content.dart';
 import 'package:provider/provider.dart';
 
 class OtpScreen extends StatefulWidget {

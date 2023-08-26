@@ -29,12 +29,20 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter_svg: any
-  flutter:
-    sdk: flutter
   google_fonts: any
   provider: any
   flutter_sequence_animation: any
   flutter_platform_widgets: any
+  geolocator: any
+  geocoding: any
+  flutter_google_places: any
+  google_maps_flutter: any
+  permission_handler: any
+
+  flutter:
+    sdk: flutter
+
+
 
 
 
@@ -68,6 +76,7 @@ flutter:
   assets:
     - assets/
     - assets/common/
+    - assets/menu/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

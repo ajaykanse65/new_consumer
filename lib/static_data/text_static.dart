@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppText {
-  static const String zippyExpertText = "Zippy Experts";
-  static const String expertText = " armed with the latest tools and techniques";
-  static const String descText = "Time to step into a world of hassle-free gadget maintenance!";
-  static const String terms1Text = "By selecting you are agreeing to the ";
-  static const String terms2Text = "Terms of Services";
-  static const String terms3Text = " & ";
+  static const String zippyExpertText = " Zippy";
+  static const String expertText = "Welcome to";
+  static const String descText = "Login or get started";
+  static const String terms1Text = "By continuing, you agree to Zippy’s ";
+  static const String terms2Text = "Terms of Use.";
+  static const String terms3Text = " Read our ";
   static const String terms4Text = "Privacy Policy";
   static const String tagText = "Fast.\nReliable.\nModern.";
   static const String verificationText = "Enter verification code";
+  static const String loginWithAccount = "LogIn into your Account";
+  static const String create = "Create an account";
+  static const String noAccount = 'Don’t have an account? ';
+  static const String exitAccount = 'Already have an account? ';
+  static const String login = 'Login';
+  static const String createAcc = 'Create Now';
   static const String noText = "We have sent you a 4 digit verification code on\n";
   static const String resendText = "Resend in ";
   static const String locationText = "Select Location";
@@ -31,6 +37,7 @@ class AppText {
 class ButtonText {
   static const String continueText = "Continue";
   static const String otpText = "Send OTP";
+  static const String resend = "Resend OTP";
   static const String verifyText = "Verify";
   static const String locAccessText = "Access Location";
   static const String locManualText = "Enter Location Manually";
@@ -46,25 +53,27 @@ class TextStyleAll extends TextStyle {
   static TextStyle headLineStyle = GoogleFonts.inter(
     fontSize: 28,
     color: const Color(0xff2967B0),
-    fontWeight: FontWeight.w800,
+    fontWeight: FontWeight.w700,
     fontStyle: FontStyle.italic,
-    height: 1.43,
   );
   static TextStyle lineStyle = GoogleFonts.inter(
     color: const Color(0xFF0D1F37),
     fontSize: 28,
-    fontWeight: FontWeight.w500,
-    height: 1.43,
-    letterSpacing: -0.70,
+    fontWeight: FontWeight.w600,
   );
   static TextStyle largeLineStyle = GoogleFonts.inter(
     fontSize: 20,
+  );
+  static TextStyle smallLineStyle = GoogleFonts.inter(
+    fontSize: 18,
+    color: const  Color(0xFF0D1F37),
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.17,
   );
   static TextStyle mediumStyle = GoogleFonts.inter(
     fontSize: 16,
     color: const Color(0xFF686868),
     fontWeight: FontWeight.w500,
-    height: 1.31,
   );
   static TextStyle errorTextStyle = GoogleFonts.inter(fontSize: 14);
   static TextStyle smallStyle = GoogleFonts.inter(fontSize: 12);

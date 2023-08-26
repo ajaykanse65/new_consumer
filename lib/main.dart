@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:new_consumer/reusableWidget.dart';
 import 'package:new_consumer/screens/authScreen/login_screen.dart';
+import 'package:new_consumer/screens/route_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +13,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return DismissKeyboard(
+        child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -20,10 +23,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/' : (context) => const LoginScreen(),
+        '/': (context) => const LoginScreen(),
+        '/home': (context) => const RouteScreen()
       },
-    );
+    ));
   }
 }
-
-
