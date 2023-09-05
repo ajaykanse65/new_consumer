@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:new_consumer/reusableWidget.dart';
 import 'package:new_consumer/screens/authScreen/login_screen.dart';
-import 'package:new_consumer/screens/route_screen.dart';
+import 'package:new_consumer/screens/mainScreen/home_screen.dart';
+import 'package:new_consumer/screens/repairScreen/repairHome_screen.dart';
+import 'package:new_consumer/screens/shieldScreen/shieldHome_screen.dart';
+import 'package:new_consumer/screens/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,13 +24,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        bottomSheetTheme:
+            const BottomSheetThemeData(backgroundColor: Colors.transparent),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginScreen(),
-        '/home': (context) => const RouteScreen()
+        '/': (context) =>  SplashScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/repair' : (context) => const RepairHomeScreen(),
+        '/shield' : (context) => const ShieldHomeScreen(),
       },
     ));
   }

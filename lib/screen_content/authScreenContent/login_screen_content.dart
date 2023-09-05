@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 class LoginScreenContent extends StatelessWidget {
   const LoginScreenContent({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final authModel = Provider.of<AuthProvider>(context);
@@ -105,61 +104,74 @@ class LoginScreenContent extends StatelessWidget {
                       //       border: InputBorder.none),
                       // ),
                       // if (Platform.isIOS)
-                        TextFormField(
-                          onTap:()=> authModel.setHidden(),
-                          controller: authModel.mobileNo,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(10)
-                          ],
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 15),
-                              fillColor: Colors.white,
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                  width: 0.50,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color:  Color(0xFFDE2C2C),                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide:  BorderSide(
-                                  width: 0.50,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: authModel.isValidate ?const Color(0xFFDE2C2C) :const Color(0xFFDBDBDB),
+                        Form(
+                          key: authModel.formKey,
+                          child: TextFormField(
+                            validator: (value){
+                              if(value!.isEmpty){
+                                return "Please Enter Mobile Number";
+                              }else if(value.length < 10){
+                                return "Please Enter a Valid Mobile Number";
+                              }
+                              return null;
+                            },
+                            onTap:()=> authModel.setHidden(),
+                            controller: authModel.mobileNo,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(10),
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r"[0-9]"),
+                              )
+                            ],
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 15),
+                                fillColor: Colors.white,
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                    width: 0.50,
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                    color:  Color(0xFFDE2C2C),                                ),
                                 ),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                  width: 0.50,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color:  Color(0xFFDE2C2C),                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide:  BorderSide(
-                                  width: 0.50,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: authModel.isValidate ?const Color(0xFFDE2C2C) :const Color(0xFFDBDBDB),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:  BorderSide(
+                                    width: 0.50,
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                    color: authModel.isValidate ?const Color(0xFFDE2C2C) :const Color(0xFFDBDBDB),
+                                  ),
                                 ),
-                              ),
-                              errorStyle: GoogleFonts.inter(
-                                color:const Color(0xFFDE2C2C),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                height: 1.43,
-                              ),
-                              errorText: authModel.isValidate ? 'Enter 10 digits mobile number' : null,
-                              hintText: 'Mobile Number',
-                              helperStyle: GoogleFonts.inter(
-                                color: const Color(0xFF686868),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: -0.17,
-                              ),
-                              border: InputBorder.none),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                    width: 0.50,
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                    color:  Color(0xFFDE2C2C),                                ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:  BorderSide(
+                                    width: 0.50,
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                    color: authModel.isValidate ?const Color(0xFFDE2C2C) :const Color(0xFFDBDBDB),
+                                  ),
+                                ),
+                                errorStyle: GoogleFonts.inter(
+                                  color:const Color(0xFFDE2C2C),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.43,
+                                ),
+                                hintText: 'Mobile Number',
+                                helperStyle: GoogleFonts.inter(
+                                  color: const Color(0xFF686868),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: -0.17,
+                                ),
+                                border: InputBorder.none),
+                          ),
                         ),
                       const SizedBox(height: 24,),
                       CustomButton(

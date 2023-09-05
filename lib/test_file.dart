@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      // home: LoginScreen(),
     );
   }
 }
@@ -294,90 +294,90 @@ class _LocationScreenState extends State<LocationScreen> {
 }
 
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  String mobileNumber = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              onChanged: (value) {
-                setState(() {
-                  mobileNumber = value;
-                });
-              },
-              decoration: const InputDecoration(
-                hintText: 'Mobile Number',
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Show the OTP popup
-                _showOtpPopup(context);
-              },
-              child: const Text('Send OTP'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showOtpPopup(BuildContext context) {
-    showModalBottomSheet(
-      clipBehavior: Clip.antiAlias,
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return Stack(
-          alignment: Alignment.topRight,
-          children: [
-            const Positioned(
-                bottom: 150,
-                child: Icon(Icons.close)),
-            Positioned(
-              bottom: 130,
-                child: Column(
-              children: [
-                const Text('Enter OTP'),
-                const SizedBox(height: 16.0),
-                const TextField(
-                  decoration: InputDecoration(
-                    hintText: 'OTP',
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle OTP verification
-                    Navigator.pop(context); // Close the bottom sheet
-                  },
-                  child: const Text('Verify OTP'),
-                ),
-
-              ],
-            )),
-
-          ],
-        );
-      },
-    );
-  }
-
-
-}
+// class LoginScreen extends StatefulWidget {
+//   @override
+//   _LoginScreenState createState() => _LoginScreenState();
+// }
+//
+// class _LoginScreenState extends State<LoginScreen> {
+//   String mobileNumber = '';
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Login'),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             TextField(
+//               onChanged: (value) {
+//                 setState(() {
+//                   mobileNumber = value;
+//                 });
+//               },
+//               decoration: const InputDecoration(
+//                 hintText: 'Mobile Number',
+//               ),
+//             ),
+//             ElevatedButton(
+//               onPressed: () {
+//                 // Show the OTP popup
+//                 _showOtpPopup(context);
+//               },
+//               child: const Text('Send OTP'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   void _showOtpPopup(BuildContext context) {
+//     showModalBottomSheet(
+//       clipBehavior: Clip.antiAlias,
+//       context: context,
+//       isScrollControlled: true,
+//       builder: (BuildContext context) {
+//         return Stack(
+//           alignment: Alignment.topRight,
+//           children: [
+//             const Positioned(
+//                 bottom: 150,
+//                 child: Icon(Icons.close)),
+//             Positioned(
+//               bottom: 130,
+//                 child: Column(
+//               children: [
+//                 const Text('Enter OTP'),
+//                 const SizedBox(height: 16.0),
+//                 const TextField(
+//                   decoration: InputDecoration(
+//                     hintText: 'OTP',
+//                   ),
+//                 ),
+//                 const SizedBox(height: 16.0),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     // Handle OTP verification
+//                     Navigator.pop(context); // Close the bottom sheet
+//                   },
+//                   child: const Text('Verify OTP'),
+//                 ),
+//
+//               ],
+//             )),
+//
+//           ],
+//         );
+//       },
+//     );
+//   }
+//
+//
+// }
 
 
 
@@ -631,3 +631,6 @@ class _TimerScreenState extends State<TimerScreen> {
     );
   }
 }
+
+
+

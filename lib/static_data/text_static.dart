@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+
 class AppText {
   static const String zippyExpertText = " Zippy";
   static const String expertText = "Welcome to";
@@ -25,13 +27,30 @@ class AppText {
   static const String locationEnterText = "Enter your Location";
   static const String locationServedText = "Browse Served Locations";
   static const String locationResultText = "Search Results";
-  static const String homeDeviceText = "Services by Device";
-  static const String homeServiceText = "Special Offers";
+  static const String homeOffersText = "Offers for you";
   static const String homeMoreText = "What’s on your mind?";
   static const String homeChooseText = "Why choose Us";
   static const String homeFAQText = "Get Your Questions Answered";
   static const String shieldHeadText = "Ultimate Device Protection";
   static const String shieldDescText = "Insurance with a Zip of Reliability and a Shield of Accessibility!";
+  static const String homeRepair = "Repair Services by Device";
+  static const String repairAppBar = "Zippy Repair";
+  static const String shieldAppBar = "Zippy Shield";
+  static const String repairTitle = "Our Skilled Technicians to Your Rescue";
+  static const String shieldTitle = "Ultimate Device Protection";
+  static const String shieldDesc = "Insurance with a Zip of Reliability and a Shield of Accessibility!";
+  static const String repairLearnMore = "Learn more about Zippy Repair";
+  static const String shieldLearnMore = "Learn more about Zippy Shield";
+  static const String featureOne = "Doorstep Repair by Fully Equipped Zippy";
+  static const String featureTwo = "No Parerwork Required";
+  static const String shieldTwo = "Accidental Damage Coverage";
+  static const String featureThree = "Repair at Zippy Authorized Service Center";
+  static const String shieldThree = "Company Authorized Service Center";
+  static const String featureFour = "All Round Support";
+  static const String shieldFour = "Unlimited Claims";
+  static const String featureFive = "Hassle free pickup and drop";
+  static const String featureSix = "100 % Digital Process";
+  static const String featureSeven = "Cashless Repair";
 }
 
 class ButtonText {
@@ -47,6 +66,9 @@ class ButtonText {
   static const String shieldBuyText = "Buy Insurance";
   static const String shieldClaimText = "Claim Insurance";
   static const String shieldLearnText = "Learn more about Zippy Shield";
+  static const String repairHome = "Get Repair Service";
+  static const String shieldBuy = "Buy Insurance";
+  static const String shieldClaim = "Claim Insurance";
 }
 
 class TextStyleAll extends TextStyle {

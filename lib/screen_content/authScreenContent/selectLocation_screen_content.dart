@@ -23,6 +23,11 @@ class _SelectLocationScreenContentState
     final authModel = Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const  IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.white,
         title: Text(
           AppText.locationText,
@@ -65,9 +70,14 @@ class _SelectLocationScreenContentState
               GestureDetector(
                 onTap: ()async{
                   // authModel.handleLocationPermission();
-                  authModel.getPermission();
-                  authModel.setLocation();
-                  Navigator.pushReplacementNamed(context, '/home');
+                  authModel.getPermission(context);
+                  // const CircularProgressIndicator();
+                  // authModel.setLocation();
+                  await Future.delayed(const Duration(seconds: 3));
+                  if(context.mounted){
+                    Navigator.pushReplacementNamed(context, '/home');
+                  }
+                  // Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: Container(
                   height: 52,
@@ -103,6 +113,7 @@ class _SelectLocationScreenContentState
                 onTap: (){
 
                   showModalBottomSheet(
+                    isDismissible: false,
                     context: context,
                     isScrollControlled: true,
                     builder: (BuildContext context) {
@@ -140,11 +151,18 @@ class _SelectLocationScreenContentState
                 ),
               ),
               Center(
-                 child: TextButton(onPressed: (){
-                   authModel.skipMethod();
-                   authModel.unSetLocation();
-                   Navigator.pushReplacementNamed(context, '/home');
-                 }, child: Text(
+                 child: TextButton(
+                     onPressed: () async{
+                       Navigator.pushReplacementNamed(context, '/home');
+                       // authModel.unSetLocation();
+                       // print(authModel.isNavigate);
+                       // const CircularProgressIndicator();
+                       // await Future.delayed(const Duration(seconds: 5));
+                       // if(context.mounted){
+                       //   Navigator.pushReplacementNamed(context, '/home');
+                       // }
+                     },
+                     child: Text(
                    ButtonText.locSkipText,
                    textAlign: TextAlign.center,
                    style: GoogleFonts.inter(

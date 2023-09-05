@@ -38,7 +38,9 @@ dependencies:
   flutter_google_places: any
   google_maps_flutter: any
   permission_handler: any
-
+  url_launcher: any
+  carousel_slider: any
+  shared_preferences: any
   flutter:
     sdk: flutter
 
@@ -77,6 +79,8 @@ flutter:
     - assets/
     - assets/common/
     - assets/menu/
+    - assets/home/
+    - assets/repair/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

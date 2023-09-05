@@ -2,19 +2,28 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:new_consumer/screens/authScreen/email_password_login_screen.dart';
+import 'package:new_consumer/screens/authScreen/login_screen.dart';
 import 'package:new_consumer/screens/authScreen/otp_screen.dart';
+import 'package:new_consumer/screens/mainScreen/home_screen.dart';
+import 'package:new_consumer/test_file.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 class AuthProvider extends ChangeNotifier{
   bool _validate = false;
   final bool _isLoading = true;
-  String currentAddress = "Add your address";
+  String name = "Add Address";
+  String currentAddress = "Enable Location or enter manually";
   Position? _currentPosition;
   bool _hideWan = true;
-  bool _isNavigate = false;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  // bool isNavigate = true;
   TextEditingController mobileNo = TextEditingController();
+
   final List<TextEditingController> otpControllers = List.generate(4, (index) => TextEditingController(),);
   FocusNode? focusNode;
   String contactNo = '';
@@ -23,12 +32,42 @@ class AuthProvider extends ChangeNotifier{
   int get secondsRemaining => _secondsRemaining;
 
   bool get isHidden => _hideWan;
-  bool get isNavigate => _isNavigate;
+  // bool get isNav => isNavigate;
   bool get isValidate => _validate;
   bool get loading => _isLoading;
-  String get isContactNo => contactNo;
+  GlobalKey<FormState> get formKey => _formkey;
   String get address => currentAddress;
+  String get userName => name;
   bool get areAllOTPsFilled => otpControllers.every((controller) => controller.text.isNotEmpty);
+
+
+  Future<void> checkUser(BuildContext context) async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences = await SharedPreferences.getInstance();
+    var UserID = preferences.getString('otp');
+    print(UserID);
+    if (UserID == null || UserID == '') {
+      Timer(const Duration(seconds: 3),
+              ()=>
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen())
+              )
+      );
+
+      // print('In If');
+      // Timer(const Duration(seconds: 3),
+      //         ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn())
+      //     )
+      // );
+    }else{
+      // print('In Else');
+      Timer(const Duration(seconds: 3),
+              ()=>
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen())
+              )
+      );
+
+    }
+  }
 
 
 
@@ -38,15 +77,18 @@ class AuthProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void setLocation(){
-    _isNavigate = true;
-    notifyListeners();
-  }
 
-  void unSetLocation(){
-    _isNavigate = false;
-    notifyListeners();
-  }
+
+  // void unSetLocation(){
+  //   isNavigate = true;
+  //   notifyListeners();
+  // }
+  //
+  //
+  // void setLocation(){
+  //   isNavigate = false;
+  //   notifyListeners();
+  // }
 
   void setVisible(BuildContext context){
     _hideWan = true;
@@ -54,11 +96,11 @@ class AuthProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void skipMethod(){
-    // _isLoading = false;
-    _isNavigate = false;
-    notifyListeners();
-  }
+  // void skipMethod(){
+  //   // _isLoading = false;
+  //   _isNavigate = false;
+  //   notifyListeners();
+  // }
 
 
   void startTimer() {
@@ -87,9 +129,10 @@ class AuthProvider extends ChangeNotifier{
 
   Future<void> sendOTP(BuildContext context)async{
     mobileNo.text.length < 10 || mobileNo.text.isEmpty ? _validate = true : _validate = false;
-    if(_validate == false){
-      contactNo = mobileNo.text;
+    if(_formkey.currentState!.validate()){
+      contactNo = "+91 ${mobileNo.text}";
       showModalBottomSheet(
+        isDismissible: false,
         context: context,
         isScrollControlled: true,
         builder: (BuildContext context) {
@@ -101,6 +144,9 @@ class AuthProvider extends ChangeNotifier{
     }
     notifyListeners();
   }
+
+
+
   @override
   void dispose() {
     mobileNo.dispose();
@@ -112,9 +158,12 @@ class AuthProvider extends ChangeNotifier{
   }
 
   Future<void> checkNavigation()async{
-    if(_isNavigate == true){
-      getCurrentPosition();
+
+    var status = await Permission.locationWhenInUse.status;
+    if(status != PermissionStatus.granted){
+      return;
     }else{
+      getCurrentPosition();
 
     }
   }
@@ -153,24 +202,26 @@ class AuthProvider extends ChangeNotifier{
 
 
 
-  Future<void>  getPermission() async{
+  Future<void>  getPermission(BuildContext context) async{
 
     PermissionStatus permissionGranted;
     permissionGranted = await Permission.location.request();
-    notifyListeners();
     // permissionGranted = await Permission.camera.request();
     // permissionGranted = await Permission.storage.request();
     // permissionGranted = await Permission.photos.request();
     if (permissionGranted == PermissionStatus.denied) {
       permissionGranted = await Permission.location.request();
-      notifyListeners();
       // permissionGranted = await Permission.camera.request();
       // permissionGranted = await Permission.storage.request();
-      // permissionGranted = await Permission.photos.request();
-      if (permissionGranted != PermissionStatus.granted) {
-        notifyListeners();
-        return;
-      }
+      // // permissionGranted = await Permission.photos.request();
+
+      // if (permissionGranted != PermissionStatus.granted) {
+      //   print('object');
+      //   if (!context.mounted) return;
+      //   Navigator.pushReplacementNamed(context, '/home');
+      //   notifyListeners();
+      //   return;
+      // }
     }
   }
 
@@ -193,8 +244,8 @@ class AuthProvider extends ChangeNotifier{
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
 
-      currentAddress =
-      '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+      currentAddress = '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+      name = "Mathew";
       print(currentAddress);
       // _isLoading = false;
       notifyListeners();
